@@ -4,6 +4,9 @@ import com.cos.security1.model.User;
 import com.cos.security1.repository.UserRepository;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,4 +62,19 @@ public class IndexController {
         System.out.println(user);
         return "redirect:/loginForm";
     }
+
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/info")
+    public @ResponseBody String info(){
+        return "개인정보";
+    }
+
+
+    //@PostAuthorize() 함수 끝나고 검증 잘 안씀씀
+   @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')") //함수 들어가기 전에
+    @GetMapping("/data")
+    public @ResponseBody String data(){
+        return "데이터정보";
+    }
+
 }

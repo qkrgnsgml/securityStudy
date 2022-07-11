@@ -23,6 +23,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true) //ㄴsecured 어노테이션 활성화, pre, Post Authorize 어노테이션 활성화
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Bean
@@ -40,7 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/loginForm");
+                .loginPage("/loginForm")
+                .loginProcessingUrl("/login") //logi주소가 호출되면 시큐리티가 낚아챔
+                .defaultSuccessUrl("/");
     }
 
 
