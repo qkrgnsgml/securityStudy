@@ -21,6 +21,9 @@ public class User {
     private String password;
     private String email;
     private String role;
+
+    private String provider; //구글
+    private String providerId; //구글에서 받은 PK
     @CreationTimestamp
     private Timestamp createDate;
 }
