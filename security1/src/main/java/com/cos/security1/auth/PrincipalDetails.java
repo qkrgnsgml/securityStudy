@@ -5,18 +5,31 @@ package com.cos.security1.auth;
 //User 오브젝트 타입 => UserDetails 타입 객체
 
 import com.cos.security1.model.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
-public class PrincipalDetails implements UserDetails {
+@Data
+public class PrincipalDetails implements UserDetails, OAuth2User {
 
-    private com.cos.security1.model.User user; //컴포지션
+    private User user; //컴포지션
 
+    public Map<String, Object> attributes;
+
+    //일반 로그인
     public PrincipalDetails(User user) {
         this.user = user;
+    }
+
+    //oauth로그인 생성자
+    public PrincipalDetails(User user, Map<String, Object> attributes) {
+        this.user = user;
+        this.attributes = attributes;
     }
 
     //해당 유저의 권한을 리턴
@@ -62,5 +75,15 @@ public class PrincipalDetails implements UserDetails {
         //1년동안 로그인 안하면 휴면계정
         //현재시간 - 마지막 로그인시간 이면 return false
         return true;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return attributes;
     }
 }

@@ -1,6 +1,8 @@
 package com.cos.security1.model;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -26,4 +29,15 @@ public class User {
     private String providerId; //구글에서 받은 PK
     @CreationTimestamp
     private Timestamp createDate;
+
+    @Builder
+    public User(String username, String password, String email, String role, String provider, String providerId, Timestamp createDate) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.provider = provider;
+        this.providerId = providerId;
+        this.createDate = createDate;
+    }
 }
