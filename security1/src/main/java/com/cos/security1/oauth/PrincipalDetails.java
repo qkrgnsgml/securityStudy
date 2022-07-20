@@ -1,4 +1,4 @@
-package com.cos.security1.auth;
+package com.cos.security1.oauth;
 
 //로그인 진행완료되면 시큐리티 session을 만듬
 //오브젝트 => Authentication 타입 객체(안에 User정보가 있어야됨)

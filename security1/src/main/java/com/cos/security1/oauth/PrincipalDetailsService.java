@@ -1,4 +1,4 @@
-package com.cos.security1.auth;
+package com.cos.security1.oauth;
 
 import com.cos.security1.model.User;
 import com.cos.security1.repository.UserRepository;
